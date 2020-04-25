@@ -16,6 +16,7 @@ func_get_param_value(){
 ##Enable cli
 az extension add --name subscription
 
+#Global parameters
 parameters_file="${BASEDIR}/../../../parameters.json"
 customer_name=$(func_get_param_value "customer_name")
 division=$(func_get_param_value "division")

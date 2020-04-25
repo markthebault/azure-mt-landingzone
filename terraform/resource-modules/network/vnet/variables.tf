@@ -9,7 +9,7 @@ variable "vnet_name" {
 
 variable "vnet_address_ranges" {
   description = "List of the ip address ranges for the vnet"
-  type        = "list"
+  type        = list
 }
 
 variable "tags" {

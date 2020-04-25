@@ -49,12 +49,12 @@ variable "sku" {
 
 variable "client_address_spaces" {
   description = "The address space out of which ip addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation"
-  type        = "list"
+  type        = list
 }
 
 variable "vpn_client_protocols" {
   description = "List of the protocols supported by the vpn client. The supported values are SSTP, IkeV2 and OpenVPN."
-  type        = "list"
+  type        = list
 }
 
 variable "certificate_data" {
@@ -64,5 +64,5 @@ variable "certificate_data" {
 
 variable "tags" {
   description = "Tags to be added to resource"
-  type        = "map"
+  type        = map
 }

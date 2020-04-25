@@ -2,6 +2,7 @@
 set -e
 BASEDIR=$(dirname "$0")
 
+parameters_file="${BASEDIR}/../../../parameters.json"
 func_get_param_value(){
     if [ -z $1 ]; then
         echo "Value name must be given"
@@ -17,7 +18,7 @@ func_get_param_value(){
 az extension add --name subscription
 
 #Global parameters
-parameters_file="${BASEDIR}/../../../parameters.json"
+
 customer_name=$(func_get_param_value "customer_name")
 division=$(func_get_param_value "division")
 department=$(func_get_param_value "department")

@@ -90,15 +90,20 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
         ;;
 
     apply)
-        STATEMENTS
+        terraform apply \
+            -parallelism=15 \
+            terraform.out
         ;;
 
     destroy)
-        STATEMENTS
+        terraform destroy \
+            -var-file=./terraform.tfvars \
+            -var-file=../../globalvars.tfvars \
+            -var-file=../../../accounts.json
         ;;
 
     show)
-        STATEMENTS
+        terraform show -json
         ;;
 
     *)

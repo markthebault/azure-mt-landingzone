@@ -21,9 +21,9 @@ No requirements.
 
 | Name | Version |
 |------|---------|
+| azurerm | n/a |
 | tls | n/a |
 | random | n/a |
-| azurerm | n/a |
 
 ## Inputs
 

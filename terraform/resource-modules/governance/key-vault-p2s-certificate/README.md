@@ -27,9 +27,9 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| key\_vault\_id | ID for the Key Vault that the certificate will be generated in | `string` | n/a | yes |
-| certificate\_contents | The base64-encoded certificate contents. Changing this forces a new resource to be created. | `string` | n/a | yes |
-| certificate\_password | The password associated with the certificate. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| key\_vault\_id | ID for the Key Vault that the certificate will be generated in | `any` | n/a | yes |
+| certificate\_contents | The base64-encoded certificate contents. Changing this forces a new resource to be created. | `any` | n/a | yes |
+| certificate\_password | The password associated with the certificate. Changing this forces a new resource to be created. | `any` | n/a | yes |
 
 ## Outputs
 

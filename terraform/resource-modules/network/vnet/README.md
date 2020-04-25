@@ -37,8 +37,6 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| vnet\_rg\_name | Generated vnet resource group name |
-| vnet\_rg\_id | Vnet owning resource group id |
 | vnet\_name | Generated vnet name |
 | vnet\_id | vnet resource id |
 

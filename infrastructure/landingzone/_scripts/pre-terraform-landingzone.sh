@@ -57,5 +57,5 @@ az account list | jq -r '.[] | {name, id}' > ${BASEDIR}/../../../accounts.json
 # Export terraform credentials
 tf_sp_appid=$(echo $tf_sp_json | jq -r '.appId')
 tf_sp_password=$(echo $tf_sp_json | jq -r '.password')
-echo  tf_sp_appid=\"$tf_sp_appid\" > ${BASEDIR}/../../tf-sp.tfvars
-echo  tf_sp_password=\"$tf_sp_password\" >> ${BASEDIR}/../../tf-sp.tfvars
+echo  export TF_VAR_tf_sp_appid=\"$tf_sp_appid\" > ${BASEDIR}/../../tf-sp.env
+echo  export TF_VAR_tf_sp_password=\"$tf_sp_password\" >> ${BASEDIR}/../../tf-sp.env

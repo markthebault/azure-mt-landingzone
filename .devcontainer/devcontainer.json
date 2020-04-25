@@ -7,8 +7,7 @@
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/zsh"
 	},
-	"mounts":["source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/clz/.ssh,type=bind,consistency=cached",
-				"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/clz/.gitconfig,type=bind,consistency=cached"],
+	"mounts":["source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/clz/.ssh,type=bind,consistency=cached"],
 
 
 	"postCreateCommand": "cp -R /tmp/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*",

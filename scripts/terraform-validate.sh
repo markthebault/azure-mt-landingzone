@@ -1,5 +1,5 @@
 #!/bin/sh
-# regenerates readmes to pick up any changes that impact them
+# Validates that the modules are declared correctly
 
 set -e
 
@@ -11,11 +11,12 @@ for file in $(find . -name 'README-head.md'); do
     cd "$dir";
 
     echo -e "provider \"azurerm\" { \\n version = \"=2.6.0\" \\n features {} \\n }" > provider.tf
+    echo -e "provider \"azurerm\" { \\n alias = \"shared_services\" \\n version = \"=2.6.0\" \\n features {} \\n }" > provider2.tf
     terraform init
     terraform validate
 
     #Clean up
-    rm provider.tf
+    rm provider.tf provider2.tf
     # rm -Rf .terraform
     cd -;
 done

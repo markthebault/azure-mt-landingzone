@@ -18,7 +18,8 @@
 		"geeebe.duplicate",
 		"gieson.dupe-file",
 		"oderwat.indent-rainbow",
-		"shd101wyy.markdown-preview-enhanced"
+		"shd101wyy.markdown-preview-enhanced",
+		"sahmed.terraform-comments-beautifier"
 	],
 	"containerUser": "clz",
 	"updateRemoteUserID":"true"

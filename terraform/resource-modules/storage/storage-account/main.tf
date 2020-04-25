@@ -44,9 +44,9 @@ resource "azurerm_storage_container" "container" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "storage_account_diag_settings" {
-  name               = var.storage_account_name 
-  target_resource_id = "${azurerm_storage_account.asa.id}"
-  log_analytics_workspace_id = var.log_analytics_workspace_id  
+  name                        = var.storage_account_name 
+  target_resource_id          = azurerm_storage_account.asa.id
+  log_analytics_workspace_id  = var.log_analytics_workspace_id  
 
   dynamic "log" {
     for_each = [ 

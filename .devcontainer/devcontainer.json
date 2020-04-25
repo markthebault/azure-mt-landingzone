@@ -1,0 +1,23 @@
+{
+	"name": "MT Cloud landing zone!",
+	"dockerFile": "Dockerfile",
+	"runArgs": [],
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/zsh"
+	},
+	"mounts":["source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/clz/.ssh,type=bind,consistency=cached",
+				"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/clz/.gitconfig,type=bind,consistency=cached"],
+
+
+	"postCreateCommand": "cp -R /tmp/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*",
+
+	"extensions": [
+        "4ops.terraform",
+		"mutantdino.resourcemonitor",
+		"geeebe.duplicate"
+	],
+	"containerUser": "clz",
+	"updateRemoteUserID":"true"
+}

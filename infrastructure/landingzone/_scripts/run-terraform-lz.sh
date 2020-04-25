@@ -78,11 +78,15 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
         ;;
 
     init)
-        STATEMENTS
+        terraform init -backend-config=./backend.tfvars
         ;;
 
     plan)
-        STATEMENTS
+        terraform plan \
+            -var-file=./terraform.tfvars \
+            -var-file=../../globalvars.tfvars \
+            -var-file=../../../accounts.json \
+            -out terraform.out
         ;;
 
     apply)

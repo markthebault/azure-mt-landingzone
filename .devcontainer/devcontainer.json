@@ -16,7 +16,10 @@
 	"extensions": [
         "4ops.terraform",
 		"mutantdino.resourcemonitor",
-		"geeebe.duplicate"
+		"geeebe.duplicate",
+		"gieson.dupe-file",
+		"oderwat.indent-rainbow",
+		"shd101wyy.markdown-preview-enhanced"
 	],
 	"containerUser": "clz",
 	"updateRemoteUserID":"true"

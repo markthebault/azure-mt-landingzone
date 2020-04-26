@@ -11,7 +11,7 @@ for file in $(find . -name '*_test.go'); do
 
     echo -e "provider \"azurerm\" { \\n version = \"=2.6.0\" \\n features {} \\n }" > ../provider.tf
     echo -e "provider \"azurerm\" { \\n alias = \"shared_services\" \\n version = \"=2.6.0\" \\n features {} \\n }" > ../provider2.tf
-    go test -v -timeout 30m
+    go test -v -timeout 45m
 
     #Clean up
     rm ../provider.tf ../provider2.tf

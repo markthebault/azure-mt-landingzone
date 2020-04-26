@@ -1,13 +1,9 @@
-###########################################
-# Setting up Resource Variables for Subnets
-###########################################
 variable "resource_group" {
   description = "Resource Group of vNet"
 }
 
 variable "vnet_name" {
   description = "The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created."
-  type        = "string"
 }
 
 variable "subnets" {

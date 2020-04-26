@@ -8,11 +8,6 @@ variable "vnet_name" {
   
 }
 
-variable "tier" {
-  description = "The tier of a VNet, e.g HUB, or SPK"
-  
-}
-
 variable "nsg_name" {
   description = "Name of the Hub Vnet"
   
@@ -60,5 +55,5 @@ variable "nsg_rules" {
 
 variable "tags" {
   description = "Map of tags that will be applied to the VNet"
-  type        = "map"
+  type        = map
 }

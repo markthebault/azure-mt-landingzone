@@ -20,7 +20,10 @@ variable "tags" {
 
 variable "ddos_protection_plan" {
   description = "Ddos protection plan applied to the VNET"
-  default = null
+  default = {
+    enable = false
+    id = ""
+  }
 }
 
 variable "dns_servers" {

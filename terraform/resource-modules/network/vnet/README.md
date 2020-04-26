@@ -30,7 +30,7 @@ No requirements.
 | vnet\_name | The name of the vnet | `any` | n/a | yes |
 | vnet\_address\_ranges | List of the ip address ranges for the vnet | `list` | n/a | yes |
 | tags | Map of tags that will be applied to the VNet | `map` | `{}` | no |
-| ddos\_protection\_plan | Ddos protection plan applied to the VNET | `any` | `null` | no |
+| ddos\_protection\_plan | Ddos protection plan applied to the VNET | `map` | <pre>{<br>  "enable": false,<br>  "id": ""<br>}</pre> | no |
 | dns\_servers | List of DNS Servers passed to the VNET | `list` | `[]` | no |
 
 ## Outputs

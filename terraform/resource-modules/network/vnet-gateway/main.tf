@@ -1,14 +1,14 @@
 resource "azurerm_public_ip" "vnet_gateway" {
   name                = var.gwip_name
-  location            = var.resource_group.vnet.location
-  resource_group_name = var.resource_group.vnet.name
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
   allocation_method   = var.ip_allocation
 }
 
 resource "azurerm_virtual_network_gateway" "main" {
   name                = var.gw_name
-  location            = var.resource_group.vnet.location
-  resource_group_name = var.resource_group.vnet.name
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
 
   type     = var.gateway_type
   vpn_type = var.vpn_type
@@ -30,7 +30,7 @@ resource "azurerm_virtual_network_gateway" "main" {
     root_certificate {
       name = "Self-signed-P2S-KV-cert"
 
-      public_cert_data = base64encode(var.certificate_data)
+      public_cert_data = var.certificate_data
     }
   }
   tags = var.tags

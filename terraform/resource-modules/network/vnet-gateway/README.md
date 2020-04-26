@@ -42,5 +42,5 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| vnet\_gateway\_id | Virtual network gateway resource |
+| vnet\_gateway | Virtual network gateway resource |
 

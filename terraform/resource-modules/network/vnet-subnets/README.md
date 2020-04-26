@@ -37,7 +37,7 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | resource\_group | Resource Group of vNet | `any` | n/a | yes |
-| vnet\_name | The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| vnet\_name | The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created. | `any` | n/a | yes |
 | subnets | Map of subnets with name, subnet\_cidr, and service\_endpoints. | `list` | n/a | yes |
 
 ## Outputs

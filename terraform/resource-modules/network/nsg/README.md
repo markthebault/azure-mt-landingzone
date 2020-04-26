@@ -74,7 +74,6 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | resource\_group | The resource group to which the resources will be deployed | `any` | n/a | yes |
 | vnet\_name | Name of the Hub Vnet | `any` | n/a | yes |
-| tier | The tier of a VNet, e.g HUB, or SPK | `any` | n/a | yes |
 | nsg\_name | Name of the Hub Vnet | `any` | n/a | yes |
 | subnet\_ids | Subnets the NSG will apply to | `list` | n/a | yes |
 | subnet\_names | Subnet names the NSG will apply to. Used for count | `list` | n/a | yes |

@@ -1,23 +1,38 @@
+provider "azurerm" {
+  alias = "spoke"
+  features {}
+}
+
+provider "azurerm" {
+  alias = "hub"
+  features {}
+}
+
+
 resource "azurerm_virtual_network_peering" "hub_to_spoke" {
   name                         = var.hub_to_spoke_name
-  resource_group_name          = var.hub_vnet_rg
+  resource_group_name          = var.hub_vnet_rg_name
   virtual_network_name         = upper(var.hub_vnet_name)
   remote_virtual_network_id    = var.spoke_vnet_id
   allow_virtual_network_access = var.allow_vnet_access
   allow_forwarded_traffic      = var.allow_forwarded_traffic
   allow_gateway_transit        = var.hub_allow_gateway_transit
   use_remote_gateways          = var.hub_use_remote_gateways
-  provider                     = "azurerm.shared_services"
+
+  
+  provider                     = azurerm.hub
 }
 
 
 resource "azurerm_virtual_network_peering" "spoke_to_hub" {
   name                         = var.spoke_to_hub_name
-  resource_group_name          = var.spoke_vnet_rg
+  resource_group_name          = var.spoke_vnet_rg_name
   virtual_network_name         = var.spoke_vnet_name
   remote_virtual_network_id    = var.hub_vnet_id
   allow_virtual_network_access = var.allow_vnet_access
   allow_forwarded_traffic      = var.allow_forwarded_traffic
   allow_gateway_transit        = var.spoke_allow_gateway_transit
   use_remote_gateways          = var.spoke_use_remote_gateways
+
+  provider                     = azurerm.spoke
 }

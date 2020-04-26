@@ -1,5 +1,5 @@
-variable "hub_vnet_rg" {
-  description = "This is the resource group name for the Hub Vnet"
+variable "hub_vnet_rg_name" {
+  description = "This is the Name of resource group name for the Hub Vnet"
   
 }
 
@@ -23,8 +23,8 @@ variable "hub_vnet_name" {
   
 }
 
-variable "spoke_vnet_rg" {
-  description = "Spoke Vnets Resource Group to be peered with the Hub Vnet"
+variable "spoke_vnet_rg_name" {
+  description = "Spoke Vnet Resource Group Name to be peered with the Hub Vnet"
   
 }
 

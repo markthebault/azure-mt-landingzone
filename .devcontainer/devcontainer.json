@@ -19,7 +19,9 @@
 		"gieson.dupe-file",
 		"oderwat.indent-rainbow",
 		"shd101wyy.markdown-preview-enhanced",
-		"sahmed.terraform-comments-beautifier"
+		"sahmed.terraform-comments-beautifier",
+		"esbenp.prettier-vscode",
+		"ms-vscode.go"
 	],
 	"containerUser": "clz",
 	"updateRemoteUserID":"true"

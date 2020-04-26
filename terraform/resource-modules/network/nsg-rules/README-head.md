@@ -19,3 +19,4 @@ In a case where more NGS need to be created this module should be extended and m
   private_internal_cidr_allow   = var.public_subnet_cidr
 
 ```
+

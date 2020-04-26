@@ -36,5 +36,5 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| resource\_group\_name | Create resource group |
+| resource\_group | Create resource group |
 

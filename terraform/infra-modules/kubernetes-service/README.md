@@ -15,7 +15,9 @@ No requirements.
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| local | n/a |
 
 ## Inputs
 
@@ -35,14 +37,19 @@ No provider.
 | default\_nodepool\_node\_count | The number of nodes in default node pool for AKS | `number` | `3` | no |
 | default\_nodepool\_auto\_scaling | Enable autoscaling of the default nodepool | `bool` | `true` | no |
 | network\_profile | Network profile that will be used with AKS | `map` | <pre>{<br>  "dns_service_ip": "192.168.1.10",<br>  "docker_bridge_cidr": "192.168.32.10/20",<br>  "load_balancer_sku": "standard",<br>  "network_plugin": "kubenet",<br>  "pod_cidr": "192.168.16.0/20",<br>  "service_cidr": "192.168.0.0/20"<br>}</pre> | no |
+| k8s\_rbac\_aad\_enabled | Enable AKS to talk to AAD for user rbac autentication | `bool` | `true` | no |
+| k8s\_rbac\_aad\_prefix | If the module will create AAD SPs for AKS, the entered prefix a will be applied | `string` | `""` | no |
+| k8s\_rbac\_cli\_app\_id | The Client ID of an Azure Active Directory Application for AKS RBAC | `string` | `null` | no |
+| k8s\_rbac\_srv\_app\_id | The Server ID of an Azure Active Directory Application for AKS RBAC | `string` | `null` | no |
+| k8s\_rbac\_srv\_secret | The Server Secret of an Azure Active Directory Application for AKS RBAC | `string` | `null` | no |
+| admin\_kubeconfig\_file\_path | Ouput file of the Admin Kubeconfig | `string` | `"/tmp/kube-admin.conf"` | no |
+| user\_kubeconfig\_file\_path | Ouput file of the user Kubeconfig, when AAD integration enabled, you need to have your user attachaed to a kubernetes role | `string` | `"/tmp/kube-user.conf"` | no |
+| aks\_masters\_rbac\_roles | RBAC permissions assigned to the k8s masters | `list(map(string))` | `[]` | no |
+| aks\_kubelets\_rbac\_roles | RBAC permissions assigned to the k8s kubelets | `list(map(string))` | `[]` | no |
 | log\_analytics\_workspace\_id | Log analytic workspace ID | `any` | n/a | yes |
 | tags | Tags to be added to resources | `map` | `{}` | no |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| aks | The kubernetes Module |
-| container\_registry | The container registry Module |
-| resource\_group | The resource group where the resources has been created |
+No output.
 

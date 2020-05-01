@@ -63,6 +63,7 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | aks | Created cluster |
-| aks\_identity | The system assigned identity created when aks is created |
+| aks\_kubelets\_identity | The system assigned identity to kubelets created when aks is created |
+| aks\_masters\_identity | The system assigned identity to masters created when aks is created |
 | key\_k8s\_nodes | The key used to ssh the kubernetes nodes |
 

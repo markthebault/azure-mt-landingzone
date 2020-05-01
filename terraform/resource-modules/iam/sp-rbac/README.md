@@ -32,4 +32,5 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | app | Application created for the service principal |
+| secret | Password of the application |
 

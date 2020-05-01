@@ -31,8 +31,8 @@ resource "azuread_service_principal" "main" {
   tags = var.tags
 }
 
-resource "azuread_service_principal_password" "main" {
-  service_principal_id = azuread_service_principal.main.id
+resource "azuread_application_password" "main" {
+  application_object_id = azuread_application.main.id
   value                = random_uuid.secret.result
   end_date_relative = "8760h" #one year
 }
@@ -42,4 +42,9 @@ resource "azuread_service_principal_password" "main" {
 output "app" {
   value       = azuread_application.main
   description = "Application created for the service principal"
+}
+
+output "secret" {
+  value       = azuread_application_password.main.value
+  description = "Password of the application"
 }

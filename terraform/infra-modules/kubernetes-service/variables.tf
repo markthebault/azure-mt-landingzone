@@ -75,6 +75,61 @@ variable "network_profile" {
   description = "Network profile that will be used with AKS"
 }
 
+variable "k8s_rbac_aad_enabled" {
+  type        = bool
+  default     = true
+  description = "Enable AKS to talk to AAD for user rbac autentication"
+}
+
+variable "k8s_rbac_aad_prefix" {
+  type        = string
+  default     = ""
+  description = "If the module will create AAD SPs for AKS, the entered prefix a will be applied"
+}
+variable "k8s_rbac_cli_app_id" {
+  type        = string
+  description = "The Client ID of an Azure Active Directory Application for AKS RBAC"
+  default = null
+}
+
+variable "k8s_rbac_srv_app_id" {
+  type        = string
+  description = "The Server ID of an Azure Active Directory Application for AKS RBAC"
+  default = null
+
+}
+
+variable "k8s_rbac_srv_secret" {
+  type        = string
+  description = "The Server Secret of an Azure Active Directory Application for AKS RBAC"
+  default = null
+
+}
+
+variable "admin_kubeconfig_file_path" {
+  type        = string
+  default     = "/tmp/kube-admin.conf"
+  description = "Ouput file of the Admin Kubeconfig"
+}
+
+variable "user_kubeconfig_file_path" {
+  type        = string
+  default     = "/tmp/kube-user.conf"
+  description = "Ouput file of the user Kubeconfig, when AAD integration enabled, you need to have your user attachaed to a kubernetes role"
+}
+
+variable "aks_masters_rbac_roles" {
+  type        = list(map(string))
+  default     = []
+  description = "RBAC permissions assigned to the k8s masters"
+}
+
+variable "aks_kubelets_rbac_roles" {
+  type        = list(map(string))
+  default     = []
+  description = "RBAC permissions assigned to the k8s kubelets"
+}
+
 variable "log_analytics_workspace_id" {
   description = "Log analytic workspace ID"
 }

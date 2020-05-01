@@ -1,3 +1,5 @@
+
+
 module "resource_group" {
   source = "../../resource-modules/resource-group"
   name   = var.rg_name
@@ -6,7 +8,22 @@ module "resource_group" {
   tags = var.tags
 }
 
+locals {
+  create_sps = var.k8s_rbac_aad_enabled && (var.k8s_rbac_cli_app_id == null)
+}
+module "sp_aad" {
+  source      = "../../resource-modules/iam/sps-for-aks"
+  enabled = local.create_sps
+  name = var.k8s_rbac_aad_prefix
 
+  tags = concat(values(var.tags), keys(var.tags))
+}
+
+locals {
+  aks_sp_srv_app_id       = local.create_sps ? module.sp_aad.server_sp.application_id : var.k8s_rbac_srv_app_id
+  aks_sp_srv_app_secret   = local.create_sps ? module.sp_aad.server_app_secret : var.k8s_rbac_srv_secret
+  aks_sp_cli_app_id       = local.create_sps ? module.sp_aad.client_sp.application_id : var.k8s_rbac_cli_app_id
+}
 
 module "aks" {
   source      = "../../resource-modules/containers/aks"
@@ -24,14 +41,26 @@ module "aks" {
   default_node_pool_disk_size      = var.default_node_pool_disk_size
   enable_auto_scaling              = var.default_nodepool_auto_scaling
 
-  kubernetes_rbac_enabled          = var.k8s_rbac_enabled
-  kubernetes_rbac_cli_app_id       = var.k8s_rbac_cli_app_id
-  kubernetes_rbac_srv_app_id       = var.k8s_rbac_srv_app_id
-  kubernetes_rbac_srv_secret       = var.k8s_rbac_srv_secret
+  kubernetes_rbac_aad_enabled      = var.k8s_rbac_aad_enabled
+  kubernetes_rbac_cli_app_id       = local.aks_sp_cli_app_id
+  kubernetes_rbac_srv_app_id       = local.aks_sp_srv_app_id
+  kubernetes_rbac_srv_secret       = local.aks_sp_srv_app_secret
 
   network_profile                  = var.network_profile
 
   log_analytics_workspace_resource_id = var.log_analytics_workspace_id
+}
+
+module "k8s_master_roles" {
+  source      = "../../resource-modules/iam/resources_role_assignment"
+  principal_id = module.aks.aks_masters_identity
+  roles = var.aks_masters_rbac_roles
+}
+
+module "k8s_kubelet_roles" {
+  source      = "../../resource-modules/iam/resources_role_assignment"
+  principal_id = module.aks.aks_kubelets_identity
+  roles = var.aks_kubelets_rbac_roles
 }
 
 
@@ -42,3 +71,15 @@ module "container_registry" {
 
   log_analytics_workspace_id = var.log_analytics_workspace_id
 }
+
+resource "local_file" "kubectl_admin" {
+  content  = module.aks.aks.kube_admin_config_raw
+  filename = var.admin_kubeconfig_file_path
+}
+
+
+resource "local_file" "kubectl_user" {
+  content  = module.aks.aks.kube_config_raw
+  filename = var.user_kubeconfig_file_path
+}
+

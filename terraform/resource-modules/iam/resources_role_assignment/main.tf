@@ -18,6 +18,6 @@ resource "azurerm_role_assignment" "roles" {
 
 ##################### Outputs
 output "roles_assignments" {
-  value       = module.roles
+  value       = azurerm_role_assignment.roles
   description = "List of roles assignment that have been created"
 }

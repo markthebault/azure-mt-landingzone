@@ -30,7 +30,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location                   = var.resource_group.location
   resource_group_name        = var.resource_group.name
   dns_prefix                 = local.aks_name
-  enable_pod_security_policy = true
+  # enable_pod_security_policy = true #Currently in preview
 
   linux_profile {
     admin_username = var.aks_admin_username
@@ -65,7 +65,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
 
     kube_dashboard {
-      enabled = false
+      enabled = true
     }
   }
 

@@ -5,7 +5,7 @@ resource "azurerm_storage_account" "asa" {
   location                 = var.storage_location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
-  account_kind             = "StorageV2"
+  account_kind             = var.kind
   is_hns_enabled           = var.is_hns_enabled
   enable_https_traffic_only = var.storage_enable_https_traffic_only
 
@@ -15,10 +15,19 @@ resource "azurerm_storage_account" "asa" {
     ip_rules = var.storage_network_cidrs_allowed
     bypass = ["Logging","Metrics","AzureServices"]
   }
+  dynamic "blob_properties"{
+    for_each = var.kind == "BlobStorage" ? [1] : []
 
-  lifecycle {
-    prevent_destroy = true
+    content{
+      delete_retention_policy {
+        days = var.retention_policy_days
+      }
+    }
   }
+
+  
+  
+  tags = var.tags
 }
 
 resource "azurerm_storage_share" "share" {
@@ -26,10 +35,6 @@ resource "azurerm_storage_share" "share" {
   name                 = var.shares[count.index].file_share_name
   storage_account_name = azurerm_storage_account.asa.name
   quota                = var.shares[count.index].data_share_quota
-
-  lifecycle {
-    prevent_destroy = true 
-  }
 }
 
 resource "azurerm_storage_container" "container" {
@@ -37,10 +42,6 @@ resource "azurerm_storage_container" "container" {
   name                  = var.containers[count.index].name
   storage_account_name  = azurerm_storage_account.asa.name
   container_access_type = var.containers[count.index].access_type
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "storage_account_diag_settings" {

@@ -45,6 +45,7 @@ variable "network_rules_default_action" {
 variable "storage_virtual_network_subnet_ids" {
   type        = list(string)
   description = "The list of vnet ids have access to storage"
+  default = []
 }
 
 variable "shares" {
@@ -54,6 +55,11 @@ variable "shares" {
     data_share_quota = number
   }))
   default = []
+}
+
+variable "kind" {
+  description = "Type the storage account that will be created"
+  default = "StorageV2"
 }
 
 variable "storage_network_cidrs_allowed" {
@@ -97,4 +103,15 @@ variable "metric_categories" {
     enabled = true
     retention_days = 7
   }]
+}
+
+
+variable "retention_policy_days" {
+  description = "Time in days that the resource will be still available after deletion, only supported for kind=BlobStorage"
+  default = 7
+}
+
+variable "tags" {
+  description = "Tags applied to the resources"
+  default = {}
 }

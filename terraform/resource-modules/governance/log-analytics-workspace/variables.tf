@@ -6,15 +6,16 @@ variable "name" {
   type        = string
   description = "A prefix used for all resources in this module"
 }
-variable "sku" {
-  type = string
-  description = "SKU for the log analtyics workspace"
-  default = "PerGB2018"
-}
 
 variable "retention_period" {
   description = "Retention period for logs and metrics"
   default = 7
+}
+
+variable "sku" {
+  type = string
+  description = "SKU for the log analtyics workspace"
+  default = "PerGB2018"
 }
 
 variable "tags" {

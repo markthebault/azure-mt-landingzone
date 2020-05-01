@@ -12,20 +12,11 @@ variable "prefix" {
   description = "A prefix used for all resources in this module"
 }
 
-variable "aks_subnet_id" {
+variable "subnet_id" {
   type        = string
   description = "The subnet identifier AKS should join to"
 }
 
-variable "kubernetes_client_id" {
-  type        = string
-  description = "The Client ID for the Service Principal to use for this Managed Kubernetes Cluster"
-}
-
-variable "kubernetes_client_secret" {
-  type        = string
-  description = "The Client Secret for the Service Principal to use for this Managed Kubernetes Cluster"
-}
 
 variable "enable_auto_scaling" {
   default     = false
@@ -53,18 +44,18 @@ variable "default_node_pool_nodes_max_pods" {
 }
 
 
-variable "aks_default_nodepool_node_count" {
-  type        = number
+variable "default_nodepool_node_count" {
+  default  = 3
   description = "The number of nodes in default node pool for AKS"
 }
 
-variable "aks_default_nodepool_nodes_max" {
+variable "default_nodepool_nodes_max" {
   type        = number
   description = "The max number of nodes in default node pool for AKS"
   default     = 30
 }
 
-variable "aks_default_nodepool_node_size" {
+variable "default_nodepool_node_size" {
   type        = string
   description = "Node size in default node pool for AKS"
 }
@@ -105,7 +96,7 @@ variable "kubernetes_rbac_enabled" {
 
 variable "kubernetes_rbac_aad_enabled" {
   type        = bool
-  default     = false
+  default     = true
   description = "Is AKS Role Based Access Control integration with AAD Enabled?"
 }
 

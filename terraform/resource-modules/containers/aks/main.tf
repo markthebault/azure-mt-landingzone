@@ -43,20 +43,19 @@ resource "azurerm_kubernetes_cluster" "aks" {
   default_node_pool {
     name                = var.default_node_pool_name
     enable_auto_scaling = var.enable_auto_scaling
-    node_count          = var.aks_default_nodepool_node_count
-    min_count           = var.enable_auto_scaling ? var.aks_default_nodepool_node_count : null
-    max_count           = var.enable_auto_scaling ? var.aks_default_nodepool_nodes_max : null
-    vm_size             = var.aks_default_nodepool_node_size
+    node_count          = var.default_nodepool_node_count
+    min_count           = var.enable_auto_scaling ? var.default_nodepool_node_count : null
+    max_count           = var.enable_auto_scaling ? var.default_nodepool_nodes_max : null
+    vm_size             = var.default_nodepool_node_size
     os_disk_size_gb     = var.default_node_pool_disk_size
     type                = "VirtualMachineScaleSets"
-    vnet_subnet_id      = var.aks_subnet_id
+    vnet_subnet_id      = var.subnet_id
     node_taints         = var.default_node_pool_nodes_taints
     max_pods            = var.default_node_pool_nodes_max_pods
   }
 
-  service_principal {
-    client_id     = var.kubernetes_client_id
-    client_secret = var.kubernetes_client_secret
+  identity {
+    type = "SystemAssigned"
   }
 
   addon_profile {

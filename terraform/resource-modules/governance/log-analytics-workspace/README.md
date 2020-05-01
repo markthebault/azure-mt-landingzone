@@ -30,8 +30,8 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | resource\_group | The resource group | `any` | n/a | yes |
 | name | A prefix used for all resources in this module | `string` | n/a | yes |
-| sku | SKU for the log analtyics workspace | `string` | `"PerGB2018"` | no |
 | retention\_period | Retention period for logs and metrics | `number` | `7` | no |
+| sku | SKU for the log analtyics workspace | `string` | `"PerGB2018"` | no |
 | tags | A map of tags to set on every taggable resources. Default tag for resource identification are applied by default. | `map` | `{}` | no |
 
 ## Outputs

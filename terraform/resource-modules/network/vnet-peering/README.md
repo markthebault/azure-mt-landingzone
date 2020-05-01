@@ -24,19 +24,19 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| azurerm.shared\_services | n/a |
-| azurerm | n/a |
+| azurerm.hub | n/a |
+| azurerm.spoke | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| hub\_vnet\_rg | This is the resource group name for the Hub Vnet | `any` | n/a | yes |
+| hub\_vnet\_rg\_name | This is the Name of resource group name for the Hub Vnet | `any` | n/a | yes |
 | hub\_to\_spoke\_name | Name of the Peering from hub to spoke | `any` | n/a | yes |
 | spoke\_to\_hub\_name | Name of the Peering from spoke to hub | `any` | n/a | yes |
 | hub\_vnet\_id | This is the ID for the Hub Vnet | `any` | n/a | yes |
 | hub\_vnet\_name | This is the Hub Vnet name | `any` | n/a | yes |
-| spoke\_vnet\_rg | Spoke Vnets Resource Group to be peered with the Hub Vnet | `any` | n/a | yes |
+| spoke\_vnet\_rg\_name | Spoke Vnet Resource Group Name to be peered with the Hub Vnet | `any` | n/a | yes |
 | spoke\_vnet\_name | Spoke Vnets Name to be peered with the Hub Vnet | `any` | n/a | yes |
 | spoke\_vnet\_id | Spoke Vnets ID to be peered with the Hub Vnet | `any` | n/a | yes |
 | allow\_vnet\_access | Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true. | `bool` | `true` | no |

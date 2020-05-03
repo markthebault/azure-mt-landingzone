@@ -1,4 +1,9 @@
 {
-  "name": "mth-base-subscription",
-  "id": "eecb1c38-f485-488a-ae6d-041ca1eef750"
+"tenant_id":"206e395b-4942-4042-a54d-c31de955ceb7",
+"subscription_ids":
+[
+  "eecb1c38-f485-488a-ae6d-041ca1eef750",
+  "b4aae396-63b8-4888-8b9a-099ae7238e89",
+  "7d6832be-fcd0-48d4-a613-8fe8b5773101"
+]
 }

@@ -38,7 +38,7 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
     #terraform validate --check-variables=false;
 
     #Get some variables
-    tenant_id=$(cat ../../globalvars.tfvars| grep tenant_id | cut -d'=' -f2 | sed -e 's/^"//' -e 's/"$//')
+    tenant_id=$(cat ../../../accounts.json| jq -r ".tenant_id")
     subscription_id=$(cat terraform.tfvars| grep subscription_id | cut -d'=' -f2 | sed -e 's/^"//' -e 's/"$//')
 
     echo "*** Export Service principal variables to be able to fetch the backend"
@@ -52,7 +52,6 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
     pretf)
         #Login with the service principal that terraform will run
         echo "Using tenant Id: $tenant_id"
-
         echo "Login with service principal, make sure it has 'Owner' rights on the subscriptions"
         az login --service-principal -u ${TF_VAR_tf_sp_appid} -p ${TF_VAR_tf_sp_password} -t $tenant_id
         
@@ -116,6 +115,7 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
             -var-file=./terraform.tfvars \
             -var-file=../../globalvars.tfvars \
             -var-file=../../../accounts.json \
+            -var-file=../../../parameters.json \
             -out terraform.out
         ;;
 

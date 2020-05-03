@@ -1,10 +1,25 @@
-resource "random_string" "random" {
-  length  = 4
-  special = false
-  upper   = false
+locals {
+  local_tags = {
+    account = "audit"
+  }
+  
+
+  tags = merge(local.tags, var.tags)
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = "${random_string.random.result}example"
-  location = "West Europe"
+module "mgnt_group" {
+  source  = "../../../terraform/resource-modules/governance/management-group"
+  enabled = true
+  
+  management_groups = {
+    root = {
+      name = "${var.customer_name}"
+      children = [{
+        name = "${var.division}"
+        subscription_ids = ["/subcriptions/****-**-*-****", "****-***-********"]
+      }
+    }
+  }
+
+  tags = local.tags
 }

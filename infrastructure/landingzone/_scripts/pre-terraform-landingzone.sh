@@ -51,8 +51,17 @@ for subscription_name in $names; do
 done
 
 #Export subscriptions values
-# az account list | jq -r '.[] | {name, id}' | jq --raw-output '"\(.name)=\"\(.id)\""' > ${BASEDIR}/../../accounts.tfvars
-az account list | jq -r '.[] | {name, id}' > ${BASEDIR}/../../../accounts.json
+echo "Exporting variables in accounts.json"
+file_accounts="${BASEDIR}/../../../accounts.json"
+echo '{' > $file_accounts
+
+tenant_id=$(az account show --query "tenantId" -o tsv)
+echo "\"tenant_id\":\"$tenant_id\"," >> $file_accounts
+
+echo "\"subscription_ids\":" >> $file_accounts
+az account list --query "[].id" >> $file_accounts
+echo '}' >> $file_accounts
+
 
 # Export terraform credentials
 tf_sp_appid=$(echo $tf_sp_json | jq -r '.appId')

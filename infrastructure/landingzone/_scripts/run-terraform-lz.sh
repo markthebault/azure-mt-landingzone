@@ -7,8 +7,6 @@ if [ -z $1 ]; then
     exit 1
 fi
 
-
-
 func_get_param_value(){
     if [ -z $1 ]; then
         echo "Value name must be given"
@@ -19,18 +17,48 @@ func_get_param_value(){
     echo $val
 }
 
+####################################################
+## Check env vars
+if [[ -z "${TF_VAR_tf_sp_appid}" ]]; then
+    echo "You must set TF_VAR_tf_sp_appid as env to be able to use terraform"
+    exit 1
+fi
+if [[ -z "${TF_VAR_tf_sp_password}" ]]; then
+    echo "You must set TF_VAR_tf_sp_appid as env to be able to use terraform"
+    exit 1
+fi
 
 
+
+
+#Run what is needed for terraform
 for dir in $(ls -d ${BASEDIR}/../tflz_*); do
     cd "$dir";
     parameters_file="../../../parameters.json"
     #terraform validate --check-variables=false;
+
+    #Get some variables
+    tenant_id=$(cat ../../globalvars.tfvars| grep tenant_id | cut -d'=' -f2 | sed -e 's/^"//' -e 's/"$//')
+    subscription_id=$(cat terraform.tfvars| grep subscription_id | cut -d'=' -f2 | sed -e 's/^"//' -e 's/"$//')
+
+    echo "*** Export Service principal variables to be able to fetch the backend"
+    export ARM_CLIENT_ID=$TF_VAR_tf_sp_appid
+    export ARM_CLIENT_SECRET=$TF_VAR_tf_sp_password
+    export ARM_SUBSCRIPTION_ID=$subscription_id
+    export ARM_TENANT_ID=$tenant_id
+
     case $1 in
 
     pretf)
+        #Login with the service principal that terraform will run
+        echo "Using tenant Id: $tenant_id"
+
+        echo "Login with service principal, make sure it has 'Owner' rights on the subscriptions"
+        az login --service-principal -u ${TF_VAR_tf_sp_appid} -p ${TF_VAR_tf_sp_password} -t $tenant_id
+        
+        
         #create storage account
         echo "******** Creating storage for backend"
-        subscription_id=$(cat terraform.tfvars| grep subscription_id | cut -d'=' -f2 | sed -e 's/^"//' -e 's/"$//')
 
         echo "Subscription id: $subscription_id"
         az account set --subscription $subscription_id
@@ -77,11 +105,13 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
 
         ;;
 
-    init)
+    init)       
+        echo "*** Run terraform init"
         terraform init -backend-config=./backend.tfvars
         ;;
 
     plan)
+        echo "*** Run terraform plan"
         terraform plan \
             -var-file=./terraform.tfvars \
             -var-file=../../globalvars.tfvars \
@@ -90,12 +120,14 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
         ;;
 
     apply)
+        echo "*** Run terraform apply"
         terraform apply \
             -parallelism=15 \
             terraform.out
         ;;
 
     destroy)
+        echo "*** Run terraform destroy"
         terraform destroy \
             -var-file=./terraform.tfvars \
             -var-file=../../globalvars.tfvars \
@@ -103,6 +135,7 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
         ;;
 
     show)
+        echo "*** Run terraform show"
         terraform show -json
         ;;
 

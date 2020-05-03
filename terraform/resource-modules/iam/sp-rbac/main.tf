@@ -12,6 +12,11 @@ variable "available_in_other_tenants" {
   description = "If the services principal can be available in a different tenant"
 }
 
+variable "tags" {
+  type        = list
+  default     = []
+  description = "Tags passed to the SP"
+}
 ##################### Resources
 resource "random_uuid" "secret" {}
 

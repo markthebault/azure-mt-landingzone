@@ -2,11 +2,16 @@ pre-terraform:
 	@echo "Create the different elements to run terraform"
 	@cd _scripts && sh pre-terraform-landingzone.sh
 
+
+landingzone: landingzone.pre landingzone.init landingzone.plan landingzone.apply
+
 landingzone.pre:
 	@sh _scripts/run-terraform-lz.sh pretf
 
-landingzone.plan:
+landingzone.init:
 	@sh _scripts/run-terraform-lz.sh init
+
+landingzone.plan:
 	@sh _scripts/run-terraform-lz.sh plan
 
 landingzone.apply:

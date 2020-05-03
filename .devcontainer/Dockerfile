@@ -4,7 +4,7 @@ FROM microsoft/azure-cli:${AZURE_CLI_TAG}
 ARG TERRAFORM_VERSION="0.12.24"
 ARG TERRAFORM_DOCS_VERSION="v0.9.1"
 
-RUN apk --update  add python bash ca-certificates git openssl unzip wget vim jq zsh docker
+RUN apk --update  add python bash ca-certificates git openssl unzip wget vim jq zsh docker make
 
 # Install kubectl
 RUN az aks install-cli

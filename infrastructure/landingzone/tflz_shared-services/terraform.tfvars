@@ -1,5 +1,5 @@
-subscription_id="eecb1c38-f485-488a-ae6d-041ca1eef750"
-subscription_short_name="ssvc"
+subscription_id="7d6832be-fcd0-48d4-a613-8fe8b5773101"
+subscription_short_name="shsvc"
 tags = {   
     component="network"
 }

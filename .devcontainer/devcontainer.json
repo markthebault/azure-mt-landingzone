@@ -13,7 +13,7 @@
 	"postCreateCommand": "cp -R /tmp/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*",
 
 	"extensions": [
-        "4ops.terraform",
+        	"4ops.terraform",
 		"mutantdino.resourcemonitor",
 		"geeebe.duplicate",
 		"gieson.dupe-file",

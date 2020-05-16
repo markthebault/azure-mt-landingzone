@@ -25,8 +25,8 @@ resource "azurerm_security_center_subscription_pricing" "sc" {
   tier = var.pricing
 
   timeouts {
-    create = 15
-    update = 15
+    create = "15m"
+    update = "15m"
   }
 }
 
@@ -38,8 +38,8 @@ resource "azurerm_security_center_workspace" "sc" {
   depends_on = [azurerm_security_center_subscription_pricing.sc]
 
   timeouts {
-    create = 15
-    update = 15
+    create = "15m"
+    update = "15m"
   }
 }
 

@@ -12,6 +12,11 @@ variable "subscription_ids" {}
 variable "root_mgnt_group_name" {
     description = "Name of the root management group"
 }
+
+variable governance_policies_matrix {
+  description = "Matrix of the different policies to apply to the subscription"
+}
+
 variable "customer_name" {}
 variable "division" {}
 variable "department" {}

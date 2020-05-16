@@ -30,7 +30,7 @@ subscriptions_offer_type=$(func_get_param_value "subscriptions_offer_type")
 
 
 #define needed subscriptions
-names="network audit"
+names="network audit expsk"
 
 #Create terraform services principal
 echo "##### Creating service principal to run terraform"
@@ -77,20 +77,25 @@ for sub_id in $(az account list --query "[].id" -o tsv); do
     az role assignment create --role Owner --assignee-object-id $tf_sp_objectid --scope "/subscriptions/$sub_id"
 done
 
+
 #Management group
+echo "##### Create root management group"
+mgnt_root_name="root"
+mngt_group_id=$(az account management-group create --name $mgnt_root_name --query 'id' -o tsv)
+
 echo "##### Give the right on management group"
-tenant_id=$(az account show --query "tenantId" -o tsv)
-mgnt_grp_id=$(az account management-group list --query '[0].id' -o tsv)
-az role assignment create --role Owner --assignee-object-id $tf_sp_objectid --scope $mgnt_grp_id
+az role assignment create --role Owner --assignee-object-id $tf_sp_objectid --scope $mngt_group_id
 
-
+####################################################
 #Export subscriptions values
 echo "##### Exporting variables in accounts.json"
 file_accounts="${BASEDIR}/../../../accounts.json"
 echo '{' > $file_accounts
 
-
+tenant_id=$(az account show --query "tenantId" -o tsv)
 echo "\"tenant_id\":\"$tenant_id\"," >> $file_accounts
+
+echo "\"root_mgnt_group_name\":\"$mgnt_root_name\"," >> $file_accounts
 
 echo "\"subscriptions_name_id\":{" >> $file_accounts
 az account list | jq -r '.[] | {name, id}' | jq --raw-output '"\"\(.name)\":\"\(.id)\","' | sed '$ s/.$//' - >> $file_accounts
@@ -100,6 +105,8 @@ echo "\"subscription_ids\":" >> $file_accounts
 az account list --query "[].id" >> $file_accounts
 #echo ",">> $file_accounts
 echo '}' >> $file_accounts
+####################################################
+
 
 #Make account file more pretty
 cp ${file_accounts} ${file_accounts}2

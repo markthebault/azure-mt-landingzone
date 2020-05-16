@@ -2,6 +2,8 @@
 
 The module will create a parent management group and the given childrens in params
 
+**MUST BE USED AS USER**
+
 ## Example
 
 ```javascript

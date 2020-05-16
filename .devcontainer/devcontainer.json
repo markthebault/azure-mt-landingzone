@@ -13,7 +13,7 @@
 	"postCreateCommand": "cp -R /tmp/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*",
 
 	"extensions": [
-        	"4ops.terraform",
+		"4ops.terraform",
 		"mutantdino.resourcemonitor",
 		"geeebe.duplicate",
 		"gieson.dupe-file",
@@ -21,7 +21,9 @@
 		"shd101wyy.markdown-preview-enhanced",
 		"sahmed.terraform-comments-beautifier",
 		"esbenp.prettier-vscode",
-		"ms-vscode.go"
+		"ms-vscode.go",
+		"mhutchie.git-graph",
+		"donjayamanne.githistory"
 	],
 	"containerUser": "clz",
 	"updateRemoteUserID":"true"

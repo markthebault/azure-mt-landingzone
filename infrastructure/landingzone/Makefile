@@ -6,19 +6,19 @@ pre-terraform:
 landingzone: landingzone.pre landingzone.init landingzone.plan landingzone.apply
 
 landingzone.pre:
-	@sh _scripts/run-terraform-lz.sh pretf
+	@sh _scripts/run-terraform-lz.sh all pretf
 
 landingzone.init:
-	@sh _scripts/run-terraform-lz.sh init
+	@sh _scripts/run-terraform-lz.sh all init
 
 landingzone.plan:
-	@sh _scripts/run-terraform-lz.sh plan
+	@sh _scripts/run-terraform-lz.sh all plan
 
 landingzone.apply:
-	@sh _scripts/run-terraform-lz.sh apply
+	@sh _scripts/run-terraform-lz.sh all apply
 
 landingzone.destroy:
-	@sh _scripts/run-terraform-lz.sh destroy
+	@sh _scripts/run-terraform-lz.sh all destroy
 
 landingzone.show:
 	@sh _scripts/run-terraform-lz.sh show

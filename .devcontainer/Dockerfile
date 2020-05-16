@@ -35,6 +35,8 @@ RUN mkdir /go && chown -R 1000:1000 /go
 USER clz
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
+RUN wget https://raw.githubusercontent.com/Azure/azure-cli/dev/az.completion -O /home/clz/az.completion &&  echo 'source ~/az.completion' >> /home/clz/.zshrc
+
 
 
 VOLUME /sources

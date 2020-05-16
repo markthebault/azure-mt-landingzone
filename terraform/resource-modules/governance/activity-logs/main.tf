@@ -37,9 +37,8 @@ resource "azurerm_monitor_log_profile" "subscription" {
 
 # Add all regions - > put in variable
 # az account list-locations --query '[].name' 
-# updated Dec 15 2019 checked March 2020
+# updated on 16/05/2020
   locations = [
-  "global",
   "eastasia",
   "southeastasia",
   "centralus",

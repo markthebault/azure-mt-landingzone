@@ -8,7 +8,7 @@ variable "location" {
 
 variable "sa_name" {
   type        = string
-  description = "Name of the storage accoun used to store the event logs"
+  description = "Name of the storage account used to store the event logs"
 }
 
 

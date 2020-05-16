@@ -1,12 +1,4 @@
 ###################### Variables
-variable "contact_email" {
-  description = "(Required) Email address of the email alerts recipient. "
-}
-
-variable "contact_phone" {
-  description = "(Required) Phone number of the alerts recipient."
-}
-
 variable "scope_id" {
   description = "(Required) The scope at which the ASC will be tied, typically a subscription: /subscriptions/00000000-0000-0000-0000-000000000000"
 }
@@ -21,15 +13,6 @@ variable "enable_security_center" {
 }
 
 ###################### Resources
-resource "azurerm_security_center_contact" "contact" {
-  count = var.enable_security_center ? 1 : 0 
-  email = var.contact_email
-  phone = var.contact_phone
-
-  alert_notifications = true
-  alerts_to_admins    = true
-}
-
 resource "azurerm_security_center_subscription_pricing" "sc" {
   count = var.enable_security_center ? 1 : 0 
   tier = "Standard"

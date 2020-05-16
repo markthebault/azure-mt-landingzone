@@ -1,12 +1,4 @@
 #!/bin/bash
-set -e
-BASEDIR=$(dirname "$0")
-
-if [ -z $1 ]; then
-    echo "Usage: $0 [pretf| init | plan | apply | destroy | show]"
-    exit 1
-fi
-
 func_get_param_value(){
     if [ -z $1 ]; then
         echo "Value name must be given"
@@ -17,7 +9,23 @@ func_get_param_value(){
     echo $val
 }
 
-####################################################
+
+
+
+set -e
+BASEDIR=$(dirname "$0")
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 account-name [pretf| init | plan | apply | destroy | show]"
+    echo "account-name can be 'all' for all accounts of just the 'audit' for instance, this must match the tflz_<account-name>"
+    exit 1
+fi
+
+#Get the account name
+account_name=$1
+shift 1
+
+
 ## Check env vars
 if [[ -z "${TF_VAR_tf_sp_appid}" ]]; then
     echo "You must set TF_VAR_tf_sp_appid as env to be able to use terraform"
@@ -28,11 +36,14 @@ if [[ -z "${TF_VAR_tf_sp_password}" ]]; then
     exit 1
 fi
 
-
-
+#Select folder is a specific value was given
+folders=$(ls -d ${BASEDIR}/../tflz_*)
+if [[ $account_name != "all" ]]; then
+    folders="${BASEDIR}/../tflz_${account_name}"
+fi
 
 #Run what is needed for terraform
-for dir in $(ls -d ${BASEDIR}/../tflz_*); do
+for dir in $folders; do
     cd "$dir";
     parameters_file="../../../parameters.json"
     #terraform validate --check-variables=false;
@@ -131,7 +142,8 @@ for dir in $(ls -d ${BASEDIR}/../tflz_*); do
         terraform destroy \
             -var-file=./terraform.tfvars \
             -var-file=../../globalvars.tfvars \
-            -var-file=../../../accounts.json
+            -var-file=../../../accounts.json \
+            -var-file=../../../parameters.json
         ;;
 
     show)

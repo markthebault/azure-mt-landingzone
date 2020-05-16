@@ -27,13 +27,8 @@ module "security" {
   tags = local.tags
 }
 
-# Keyvault for Service principals
-# ...
-# ...
-
-
 # Security policies configured for the management group
-module "custom_policies" {
+module "az_policies" {
   source = "../../../terraform/resource-modules/governance/azure-policies"
 
 
@@ -41,3 +36,9 @@ module "custom_policies" {
   log_analytics           = local.log_analytics_name
   scope                   = data.azurerm_subscription.current.id
 }
+
+
+# Keyvault for Service principals
+# ...
+# ...
+

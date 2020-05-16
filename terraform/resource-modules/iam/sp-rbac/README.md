@@ -26,6 +26,7 @@ No requirements.
 | name | Name of the application service principal that will be created | `string` | n/a | yes |
 | app\_role\_assignment\_required | If users need to be assined to the SP to be able to use it | `bool` | `false` | no |
 | available\_in\_other\_tenants | If the services principal can be available in a different tenant | `bool` | `false` | no |
+| tags | Tags passed to the SP | `list` | `[]` | no |
 
 ## Outputs
 

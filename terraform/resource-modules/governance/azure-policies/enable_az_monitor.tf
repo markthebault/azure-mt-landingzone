@@ -5,7 +5,7 @@ resource "azurerm_policy_assignment" "vm_auto_monitor" {
   count = var.policies_matrix.autoenroll_monitor_vm ? 1 : 0
   name                 = "vm_auto_monitor"
   scope                = var.scope
-  policy_definition_id = "providers/Microsoft.Authorization/policySetDefinitions/55f3eceb-5573-4f18-9695-226972c6d74a"
+  policy_definition_id = "/subscriptions/${data.azurerm_subscription.current.subscription_id}/providers/Microsoft.Authorization/policySetDefinitions/55f3eceb-5573-4f18-9695-226972c6d74a"
   description          = "Policy Assignment with Terraform"
   display_name         = "TF Deploy Azure Monitor for VM"
   location             = var.policies_matrix.msi_location

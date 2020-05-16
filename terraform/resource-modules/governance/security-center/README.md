@@ -21,8 +21,6 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| contact\_email | (Required) Email address of the email alerts recipient. | `any` | n/a | yes |
-| contact\_phone | (Required) Phone number of the alerts recipient. | `any` | n/a | yes |
 | scope\_id | (Required) The scope at which the ASC will be tied, typically a subscription: /subscriptions/00000000-0000-0000-0000-000000000000 | `any` | n/a | yes |
 | workspace\_id | (Required) Azure Log Analytics workspace ID that will be used. | `any` | n/a | yes |
 | enable\_security\_center | (Optional) Switch to determine if ASC is deployed. | `bool` | `true` | no |

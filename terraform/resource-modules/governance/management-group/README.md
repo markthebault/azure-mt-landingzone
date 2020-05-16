@@ -2,6 +2,8 @@
 
 The module will create a parent management group and the given childrens in params
 
+**MUST BE USED AS USER**
+
 ## Example
 
 ```javascript
@@ -46,6 +48,5 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| mgnt\_group | The created management group |
 | children | Children mgnt groups attached to the parent |
 

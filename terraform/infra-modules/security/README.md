@@ -15,16 +15,20 @@ No requirements.
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | rg\_name | Name of the Resource Group | `any` | n/a | yes |
-| la\_name | Name of the Log Anayltics Workspace | `any` | n/a | yes |
+| log\_analytics\_name | Name of the Log Anayltics Workspace | `any` | n/a | yes |
 | region | Geographic region resource will be deployed into | `any` | n/a | yes |
 | retention\_period | Time in days to retain logs in the log analytics workspace | `number` | `30` | no |
+| activity\_logs\_sa\_name | Name of the activity logs storage account | `string` | n/a | yes |
+| activity\_logs\_eventhub\_name | Name of the activity logs event hub | `string` | n/a | yes |
 | tags | Tags to be added to resources | `map` | `{}` | no |
 
 ## Outputs

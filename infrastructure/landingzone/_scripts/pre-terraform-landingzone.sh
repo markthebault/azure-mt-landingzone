@@ -92,9 +92,20 @@ echo '{' > $file_accounts
 
 echo "\"tenant_id\":\"$tenant_id\"," >> $file_accounts
 
+echo "\"subscriptions_name_id\":{" >> $file_accounts
+az account list | jq -r '.[] | {name, id}' | jq --raw-output '"\"\(.name)\":\"\(.id)\","' | sed '$ s/.$//' - >> $file_accounts
+echo "}," >> $file_accounts
+
 echo "\"subscription_ids\":" >> $file_accounts
 az account list --query "[].id" >> $file_accounts
+#echo ",">> $file_accounts
 echo '}' >> $file_accounts
+
+#Make account file more pretty
+cp ${file_accounts} ${file_accounts}2
+cat ${file_accounts}2 | jq '.' > ${file_accounts}
+rm ${file_accounts}2
+
 
 
 # Export terraform credentials

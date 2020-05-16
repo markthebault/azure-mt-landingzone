@@ -1,6 +1,11 @@
 data "azurerm_subscription" "current" {
 }
 
+data "azurerm_management_group" "root" {
+  name = var.root_mgnt_group_name
+}
+
+
 locals{
   tags = merge(var.tags, map("account", "audit"))
   prefix = "${var.customer_name}-${var.division}-${var.department}-${var.subscription_short_name}"
@@ -27,6 +32,7 @@ module "security" {
   tags = local.tags
 }
 
+
 # Security policies configured for the management group
 module "az_policies" {
   source = "../../../terraform/resource-modules/governance/azure-policies"
@@ -36,7 +42,6 @@ module "az_policies" {
   log_analytics           = local.log_analytics_name
   scope                   = data.azurerm_subscription.current.id
 }
-
 
 # Keyvault for Service principals
 # ...

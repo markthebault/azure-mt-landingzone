@@ -9,8 +9,8 @@ for file in $(find . -name '*_test.go'); do
     echo "************ Runnin on directory: $dir"
     cd "$dir";
 
-    echo -e "provider \"azurerm\" { \\n version = \"=2.6.0\" \\n features {} \\n }" > ../provider.tf
-    echo -e "provider \"azurerm\" { \\n alias = \"shared_services\" \\n version = \"=2.6.0\" \\n features {} \\n }" > ../provider2.tf
+    echo -e "provider \"azurerm\" { \\n version = \"=2.10.0\" \\n features {} \\n }" > ../provider.tf
+    echo -e "provider \"azurerm\" { \\n alias = \"shared_services\" \\n version = \"=2.10.0\" \\n features {} \\n }" > ../provider2.tf
     go mod init TestTerraformModule
     go get -t
     go test -v -timeout 45m

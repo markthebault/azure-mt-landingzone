@@ -8,7 +8,7 @@ This TF module creates a resource group
 ## Example Variables
 ```javascript
   region          = "westeurope"
-  environment     = "p"
+  name     = "p"
   tags = {
     terraform = true
   }

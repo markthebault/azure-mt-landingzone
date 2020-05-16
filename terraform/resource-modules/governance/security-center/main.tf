@@ -12,10 +12,22 @@ variable "enable_security_center" {
   default = true
 }
 
+variable pricing {
+  type        = string
+  default     = "Standard"
+  description = "Type of pricing of the security center"
+}
+
+
 ###################### Resources
 resource "azurerm_security_center_subscription_pricing" "sc" {
   count = var.enable_security_center ? 1 : 0 
-  tier = "Standard"
+  tier = var.pricing
+
+  timeouts {
+    create = 15
+    update = 15
+  }
 }
 
 resource "azurerm_security_center_workspace" "sc" {
@@ -24,6 +36,11 @@ resource "azurerm_security_center_workspace" "sc" {
   workspace_id = var.workspace_id
 
   depends_on = [azurerm_security_center_subscription_pricing.sc]
+
+  timeouts {
+    create = 15
+    update = 15
+  }
 }
 
 ###################### Outputs

@@ -3,7 +3,7 @@ variable "name" {
 }
 
 variable "resource_group" {
-  description = "The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created"
+  description = "The resource group resource in which to create the Key Vault. Changing this forces a new resource to be created"
 }
 
 

@@ -10,8 +10,8 @@ for file in $(find . -name 'README-head.md'); do
     echo "************ Runnin on directory: $dir"
     cd "$dir";
 
-    echo -e "provider \"azurerm\" { \\n version = \"=2.6.0\" \\n features {} \\n }" > provider.tf
-    echo -e "provider \"azurerm\" { \\n alias = \"shared_services\" \\n version = \"=2.6.0\" \\n features {} \\n }" > provider2.tf
+    echo -e "provider \"azurerm\" { \\n version = \"=2.10.0\" \\n features {} \\n }" > provider.tf
+    echo -e "provider \"azurerm\" { \\n alias = \"shared_services\" \\n version = \"=2.10.0\" \\n features {} \\n }" > provider2.tf
     terraform init
     terraform validate
 
